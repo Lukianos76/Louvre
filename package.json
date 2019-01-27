@@ -12,6 +12,6 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "jquery.steps": "^1.0.1"
+        "smartwizard": "^4.3.1"
     }
 }

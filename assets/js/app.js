@@ -9,8 +9,9 @@
 var $ = require('jquery');
 require('../css/app.css');
 
-require('jquery.steps');
+require('smartwizard');
 
+$('#smartwizard').smartWizard();
 
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
