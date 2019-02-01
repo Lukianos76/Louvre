@@ -3,16 +3,34 @@
 {% block title 'Accueil' %}
 
 {% block body %}
-    <h2>Bienvenue sur la billeterie du Louvre</h2>
-    <p>Chaque passage dans la capitale mérite une visite du Louvre, tant le plus grand musée de Paris recèle de trésors. Il
-        rassemble des œuvres de l’art occidental du Moyen Âge à 1848, des civilisations antiques orientales, égyptiennes,
-        grecques, étrusques, romaines, des arts graphiques et des arts de l’Islam. De salle en salle, l’ancien palais royal
-        dévoile ses chefs-d’oeuvre : la Joconde, Le Radeau de la Méduse, la Vénus de Milo, La Victoire de Samothrace… Au
-        total, quelque 35 000 œuvres ! En huit siècles d’existence, le Louvre a été marqué par de nombreux courants
-        architecturaux, de la forteresse médiévale du XIIe siècle à la pyramide de verre de Pei (1989). Dernier ajout : les
-        architectes Mario Bellini et Rudy Ricciotti ont signé le nouvel écrin accueillant les Arts de l’Islam, une verrière
-        ondulante recouvrant la cour Visconti et inondant de lumière les 2 800 m² du nouveau département. La visite du musée
-        est particulièrement agréable lors des nocturnes : moins fréquenté, le Louvre offre une atmosphère différente et des
-        vues imprenables sur la Pyramide de Pei, la cour Carrée et la Seine.</p>
-    <a href="{{ path('order') }}">Reserver vos billets</a>
+    <div id="home" class="container">
+        <h1>Bienvenue sur la billeterie du Louvre</h1>
+        <div class="home-paragraphe">
+            <p>
+                Chaque passage dans la capitale mérite une visite du Louvre, tant le plus grand musée de Paris recèle de trésors.
+            </p>
+            <p>
+                Il rassemble des œuvres de l’art occidental du Moyen Âge à 1848, des civilisations antiques orientales, égyptiennes,
+                grecques, étrusques, romaines, des arts graphiques et des arts de l’Islam.
+            </p>
+            <p>
+                De salle en salle, l’ancien palais royal dévoile ses chefs-d’oeuvre : la Joconde, Le Radeau de la Méduse,
+                la Vénus de Milo, La Victoire de Samothrace…
+            </p>
+            <p>
+                Au total, quelque 35 000 œuvres ! En huit siècles d’existence, le Louvre a été marqué par de nombreux
+                courants architecturaux, de la forteresse médiévale du XIIe siècle à la pyramide de verre de Pei (1989).
+            </p>
+            <p>
+                Dernier ajout : les architectes Mario Bellini et Rudy Ricciotti ont signé le nouvel écrin accueillant les
+                Arts de l’Islam, une verrière ondulante recouvrant la cour Visconti et inondant de lumière les 2 800 m²
+                du nouveau département.
+            </p>
+            <p>
+                La visite du musée est particulièrement agréable lors des nocturnes : moins fréquenté, le Louvre offre une
+                atmosphère différente et des vues imprenables sur la Pyramide de Pei, la cour Carrée et la Seine.
+            </p>
+        </div>
+        <a id="btn-order" class="btn btn-primary btn-lg" href="{{ path('booking') }}">Reserver vos billets</a>
+    </div>
 {% endblock %}

@@ -7,14 +7,46 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 var $ = require('jquery');
-require('../css/app.css');
+
+
 
 require('smartwizard');
+//require('../js/jquery.steps.min')
+require('bootstrap-datepicker');
+require('bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js');
+require('../js/collection-manager.js');
 
-$('#smartwizard').smartWizard();
+require('../css/app.css');
+
+$('#smartwizard').smartWizard({
+        selected: 0,  // Initial selected step, 0 = first step
+        keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
+        autoAdjustHeight:false, // Automatically adjust content height
+        cycleSteps: false, // Allows to cycle the navigation of steps
+        backButtonSupport: true, // Enable the back button support
+        useURLhash: true, // Enable selection of the step based on url hash
+        lang: {  // Language variables
+            next: 'Suivant',
+            previous: 'Précédent'
+        }
+    }
+);
 
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// const $ = require('jquery');
+$('.datepickerTicketDate').datepicker({
+    format: 'dd-mm-yyyy',
+    language: 'fr-FR',
+    autoclose:true,
+    daysOfWeekDisabled: '2',
+    startDate: 'today',
+    templates: {
+        leftArrow: '<i class="fas fa-arrow-left"></i>',
+        rightArrow: '<i class="fas fa-arrow-right"></i>'
+    },
+    weekStart: '1',
+
+});
+
+
 
 console.log('Webpack Encore');

@@ -12,6 +12,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "bootstrap-datepicker": "^1.8.0",
         "smartwizard": "^4.3.1"
     }
 }

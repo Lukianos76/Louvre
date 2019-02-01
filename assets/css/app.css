@@ -1,0 +1,174 @@
+
+
+
+/* COMMON */
+
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html{
+    height: 100%;
+}
+body{
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    padding-bottom: 6rem;
+}
+
+p{
+    margin: 0;
+    color: #333333;
+}
+h2{
+    font-size: 2.25rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #333333;
+}
+h3{
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin: 35px 0 0px 0;
+    color: #333333;
+}
+
+.btn-primary{
+    background-color: #83B6D6;
+    border-color: #83B6D6;
+}
+.btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active{
+    background-color: #6b97b2;
+    border-color: #6b97b2;
+
+}
+.btn-primary:focus{
+    box-shadow: 0 0 0 0.2rem #6b97b2;
+}
+
+/* HEADER */
+
+header{
+    border-bottom: 1px solid #83B6D6;
+    padding: 15px;
+}
+.lead{
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+/* FOOTER */
+footer{
+    text-align: center;
+    background: #333333;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left:0;
+    right: 0;
+}
+footer a{
+    color: #fff;
+}
+footer p{
+display: block;
+    line-height: 5rem;
+
+}
+
+
+
+/* ACCUEIL */
+
+#home{
+    text-align: center;
+    padding: 20px 0;
+}
+#home h1 {
+    margin: 7rem 0 0 0;
+}
+#home .home-paragraphe{
+    margin: 3rem 0 0 0;
+}
+#home .btn{
+    margin: 3rem 0;
+}
+#btn-order{
+    font-size: 1.75rem;
+    padding: 10px 50px;
+    text-transform: uppercase;
+}
+
+/* CALENDAR */
+
+.dow, .datepicker-switch{
+    text-transform: uppercase !important;
+}
+
+/* FORM */
+.nav-tabs{
+    line-height: 10px;
+    text-align: center;
+    margin: 20px auto !important;
+}
+.circle{
+    margin:0 auto;
+    width:30px;
+    background:none;
+    border: 2px #333333 solid;
+    height:30px;
+    text-align:center;
+    border-radius:30px;
+    line-height: 25px;
+    color: #000;
+}
+.active .circle{
+    background-color: #333333;
+    color: #ffffff;
+}
+.circle-label{
+    color: #000;
+}
+.form-step{
+    text-align: center;
+}
+.form-step small{
+    text-align: left;
+}
+.form-group{
+    margin-bottom: 0;
+}
+.form-control:focus{
+    border-color: #83B6D6;
+    box-shadow: 0 0 0 0.2rem #83B6D6
+}
+ul.tickets{
+    list-style: none;
+    padding: 0;
+}
+.nav-tabs{
+    border:none;
+    margin: 0 auto;
+
+}
+.nav-tabs .nav-link{
+    border: none;
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+    border: none;
+}
+.booking-header i{
+    font-size: 2.75rem;
+    margin-bottom: 10px;
+    color: #333333;
+}
+.booking-header{
+    margin: 35px 0 0 0;
+}
+.booking-text{
+    font-size: 1.25rem;
+    margin: 0 0 20px 0;
+}

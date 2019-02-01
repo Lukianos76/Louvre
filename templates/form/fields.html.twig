@@ -1,0 +1,12 @@
+{% use 'bootstrap_4_layout.html.twig' %}
+
+{% block date_widget %}
+    <div class="input-group">
+        {{ parent() }}
+    <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar"></i></span>
+    </div>
+    </div>
+
+
+{% endblock %}
