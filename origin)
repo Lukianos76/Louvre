@@ -1,6 +1,0 @@
-Unstaged changes after reset:
-M	assets/js/app.js
-M	package.json
-M	templates/base.html.twig
-M	templates/pages/home.html.twig
-M	yarn.lock

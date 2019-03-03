@@ -28,8 +28,10 @@ class BookingController extends AbstractController
         $form = $this->createForm(BookType::class, $booking);
         $form->handleRequest($request);
 
+
         if($form->isSubmitted() && $form->isValid())
         {
+
             $this->em->persist($booking);
             $this->em->flush();
         }
@@ -40,4 +42,7 @@ class BookingController extends AbstractController
 
 
     }
+
+
+
 }

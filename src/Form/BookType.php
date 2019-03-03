@@ -16,7 +16,7 @@ class BookType extends AbstractType
     {
         $builder
             ->add('ticketDate', DateType::class, [
-                'label' => 'Date de réservation',
+                'label' => ' ',
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['class' => 'datepickerTicketDate'],
@@ -24,7 +24,7 @@ class BookType extends AbstractType
 
             ])
             ->add('type', ChoiceType::class, [
-                'label' => 'Type de billet(s)',
+                'label' => ' ',
                 'choices' => $this->getChoices()
             ])
             ->add('tickets', CollectionType::class, [

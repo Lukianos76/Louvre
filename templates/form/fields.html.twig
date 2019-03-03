@@ -7,6 +7,179 @@
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar"></i></span>
     </div>
     </div>
-
-
 {% endblock %}
+
+{% block _book_tickets_entry_widget %}
+        <div class="card-header" id="heading{{ form.vars.name }}">
+            <h3>
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ form.vars.name }}"
+                        aria-expanded="true" aria-controls="collapse{{ form.vars.name }}">
+                Billet N°{{ form.vars.name }}
+                </button>
+            </h3>
+        </div>
+        <div id="collapse{{ form.vars.name }}" class="collapse show" aria-labelledby="heading{{ form.vars.name }}"
+             data-parent="#accordionTicket">
+            <div class="card-body">
+                <div class="row coordonnees-row">
+                    <div class="col-md-6">
+                        {{ form_row(form.firstName) }}
+                        <div class="invalid-feedback" id="firstName{{ form.vars.name }}-feedback">Veuillez entrer un prénom valide</div>
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.lastName) }}
+                        <div class="invalid-feedback" id="lastName{{ form.vars.name }}-feedback">Veuillez entrer un nom valide</div>
+                    </div>
+                </div>
+                <div class="row coordonnees-row">
+                    <div class="col-md-6">
+                        {{ form_row(form.country) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.birthDate) }}
+                        <div class="invalid-feedback" id="birthDate{{ form.vars.name }}-feedback">Veuillez sélectionner une date</div>
+                    </div>
+                </div>
+                <div class="row justify-content-center coordonnees-row">
+                    {{ form_row(form.reduction) }}
+                </div>
+                <div class="row justify-content-center">
+                <small id="typeHelpBlock" class="form-text text-muted">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Tarif accordé dans certaines conditions (étudiant, employé du musée, d’un service du Ministère de la
+                    Culture, militaire…). Il sera nécessaire de présenter un justificatif à l'entrée du musée.
+                </small>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-primary btn-ticket" type="button" >
+                        Valider le billet
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+    <script>
+
+
+        $(function () {
+            $("#firstName{{ form.vars.name }}-feedback").hide();
+            $("#lastName{{ form.vars.name }}-feedback").hide();
+            $("#birthDate{{ form.vars.name }}-feedback").hide();
+        });
+
+        var myTickets = []
+
+        $(".btn-ticket").on('click', function (e) {
+
+            if(checkTicket($('#book_tickets_{{ form.vars.name }}_firstName').val(),
+                $('#book_tickets_{{ form.vars.name }}_lastName').val(),
+                $('#book_tickets_{{ form.vars.name }}_birthDate').val()
+            )){
+
+                var ticket{{ form.vars.name }} = new ticket (
+                    $('#book_tickets_{{ form.vars.name }}_firstName').val(),
+                    $('#book_tickets_{{ form.vars.name }}_lastName').val(),
+                    $('#book_tickets_{{ form.vars.name }}_country').val(),
+                    $('#book_tickets_{{ form.vars.name }}_birthDate').val(),
+                    $('#book_tickets_{{ form.vars.name }}_reduction').is(':checked')
+                );
+                myTickets.ticket{{ form.vars.name }} = ticket{{ form.vars.name }};
+                $('#collapse{{ form.vars.name }}').collapse('toggle')
+                console.log(myTickets)
+
+            }
+
+
+        });
+
+        function ticket(firstName, lastName, country, birthDate, reduction ){
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.country = country;
+            this.birthDate = birthDate;
+            this.reduction = reduction;
+            this.age = getAge(this.birthDate);
+            this.price = getPrice(this.age, this.reduction);
+        }
+
+        function checkTicket(firstName, lastName, birthDate) {
+            var isValid = false,
+                isValidFirstName = false,
+                isValidLastName = false,
+                isValidBirthDate = false
+
+            if (firstName.length < 5){
+                isValidFirstName = false;
+                $("#firstName{{ form.vars.name }}-feedback").show();
+                $('#book_tickets_{{ form.vars.name }}_firstName').addClass("invalid")
+            }
+            else{
+                isValidFirstName = true;
+                $("#firstName{{ form.vars.name }}-feedback").hide();
+                $('#book_tickets_{{ form.vars.name }}_firstName').removeClass("invalid")
+            }
+
+            if (lastName.length < 5){
+                isValidLastName = false;
+                $("#lastName{{ form.vars.name }}-feedback").show();
+                $('#book_tickets_{{ form.vars.name }}_lastName').addClass("invalid")
+            }
+            else{
+                isValidLastName = true
+                $("#lastName{{ form.vars.name }}-feedback").hide();
+                $('#book_tickets_{{ form.vars.name }}_lastName').removeClass("invalid")
+            }
+
+            if (birthDate.length < 10){
+                isValidBirthDate = false;
+                $("#birthDate{{ form.vars.name }}-feedback").show();
+                $('#book_tickets_{{ form.vars.name }}_birthDate').addClass("invalid")
+            }
+            else{
+                isValidBirthDate = true
+                $("#birthDate{{ form.vars.name }}-feedback").hide();
+                $('#book_tickets_{{ form.vars.name }}_birthDate').removeClass("invalid")
+            }
+
+            if (isValidFirstName && isValidLastName && isValidBirthDate){
+                isValid = true;
+            }
+            return isValid
+        }
+
+        function getAge(dateString) {
+            var today = new Date();
+            var dateStringConvert = dateString[3] + dateString[4] + dateString[2] + dateString[0] +
+                dateString[1] + dateString[5] + dateString[6] + dateString[7] + dateString[8] + dateString[9];
+            var birthDate = new Date(Date.parse(dateStringConvert));
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        };
+
+        function getPrice(age, reduction){
+            if (reduction){
+                return 10;
+            }
+            else if (age >= 60)
+            {
+                return 12;
+            }
+            else if (age >= 12 && age < 60)
+            {
+                return 16;
+            }
+            else if (age >= 4 && age < 12)
+            {
+                return 8;
+            }
+        }
+
+
+    </script>
+{% endblock %}
+

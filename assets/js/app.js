@@ -11,26 +11,11 @@ var $ = require('jquery');
 
 
 require('smartwizard');
-//require('../js/jquery.steps.min')
 require('bootstrap-datepicker');
 require('bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min.js');
 require('../js/collection-manager.js');
 
 require('../css/app.css');
-
-$('#smartwizard').smartWizard({
-        selected: 0,  // Initial selected step, 0 = first step
-        keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
-        autoAdjustHeight:false, // Automatically adjust content height
-        cycleSteps: false, // Allows to cycle the navigation of steps
-        backButtonSupport: true, // Enable the back button support
-        useURLhash: true, // Enable selection of the step based on url hash
-        lang: {  // Language variables
-            next: 'Suivant',
-            previous: 'Précédent'
-        }
-    }
-);
 
 
 $('.datepickerTicketDate').datepicker({
@@ -47,6 +32,21 @@ $('.datepickerTicketDate').datepicker({
 
 });
 
+$('#smartwizard').smartWizard({
+    selected: 0,  // Initial selected step, 0 = first step
+    keyNavigation:false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
+    autoAdjustHeight:false, // Automatically adjust content height
+    cycleSteps: false, // Allows to cycle the navigation of steps
+    backButtonSupport: true, // Enable the back button support
+    useURLhash: false, // Enable selection of the step based on url hash
+    showStepURLhash: false,
+
+});
 
 
-console.log('Webpack Encore');
+
+
+
+
+
+

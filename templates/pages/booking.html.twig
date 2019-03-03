@@ -3,68 +3,126 @@
 {% block title 'Reserver vos billets' %}
 
 {% block body %}
-    <div class="container">
-        {{ form_start(form) }}
-        <div id="smartwizard">
-            <ul>
-                <li>
-                    <a href="#step-1">
-                        <div class="circle">1</div><br/>
-                        <div class="circle-label">Panier</div>
-                    </a></li>
-                <li>
-                    <a href="#step-2">
-                        <div class="circle">2</div><br/>
-                        <div class="circle-label">Coordonnées</div>
-                    </a></li>
-                <li >
-                    <a href="#step-3">
-                        <div class="circle">3</div> <br/>
-                        <div class="circle-label">Paiement</div>
-                    </a></li>
-                <li>
-                    <a href="#step-4">
-                        <div class="circle">4</div><br/>
-                        <div class="circle-label">Confirmation</div>
-                    </a></li>
-            </ul>
+<div class="container">
+
+    <div id="smartwizard">
+        <ul>
+            <li>
+                <a href="#step-1">
+                    <div class="circle">1</div>
+                    <br/>
+                    <div class="circle-label">Panier</div>
+                </a></li>
+            <li>
+                <a href="#step-2">
+                    <div class="circle">2</div>
+                    <br/>
+                    <div class="circle-label">Coordonnées</div>
+                </a></li>
+            <li>
+                <a href="#step-3">
+                    <div class="circle">3</div>
+                    <br/>
+                    <div class="circle-label">Paiement</div>
+                </a></li>
+            <li>
+                <a href="#step-4">
+                    <div class="circle">4</div>
+                    <br/>
+                    <div class="circle-label">Confirmation</div>
+                </a></li>
+        </ul>
 
 
-            <div>
-                <div id="step-1" class="form-step">
-                    <div class="booking-header">
-                        <i class="fas fa-shopping-cart"></i>
-                        <h2>Panier</h2>
-                    </div>
-                    <h3>Première étape :</h3>
-                    <p class="booking-text">Choissisez la date de votre/vos billet(s)</p>
-                    {{ form_row(form.ticketDate) }}
-                    <small id="tickedDateHelpBlock" class="form-text text-muted">
-                        <i class="fas fa-exclamation-circle"></i>
-                        Le musée est ouvert tous les jours sauf le mardi, le 1er mai, 1er novembre et 25 décembre.
-                    </small>
-                    <h3>Deuxième étape :</h3>
-                    <p class="booking-text">Choissisez le type de billet(s)</p>
-                    {{ form_row(form.type) }}
-                    <small id="typeHelpBlock" class="form-text text-muted">
-                        <i class="fas fa-exclamation-circle"></i>
-                        Il est impossible de commander un billet "Journée" pour le jour même aprés 14h.
-                    </small>
-                </div>
-                <div id="step-2" class="form-step">
-                    <div class="booking-header">
-                        <i class="fas fa-id-card"></i>
-                        <h2>Coordonnées</h2>
-                    </div>
-                    <ul class="tickets" data-prototype="{{ form_widget(form.tickets.vars.prototype)|e('html_attr') }}">
-                    </ul>
-                    {{ form_rest(form) }}
-                    <button class="btn btn-primary">{{ button|default('Valider') }}</button>
-                </div>
-            </div>
-
+        <div>
+            {{ include('pages/step1.html.twig') }}
+            {{ include('pages/step2.html.twig') }}
+            {{ include('pages/step3.html.twig') }}
+            {{ include('pages/step4.html.twig') }}
         </div>
     </div>
-    {{ form_end(form) }}
-{% endblock %}
+</div>
+    {% endblock %}
 
+{% block javascripts %}
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+
+        $(function () {
+            $("#ticketDate-feedback").hide();
+            $(".btn-toolbar").hide();
+        })
+
+
+        var myBooking = new booking();
+
+        $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+            if (stepNumber == 0 && stepDirection == 'forward'){
+                if(checkDate($('#book_ticketDate').val()))
+                {
+                    myBooking.ticketDate = $('#book_ticketDate').val();
+                    myBooking.type = $('#book_type').val();
+                    console.log(myBooking);
+                }
+                else{
+                    e.preventDefault();
+                }
+
+            }
+            else if(stepNumber == 1 && stepDirection == 'forward'){
+                myBooking.tickets = myTickets;
+                var ticketsNumber = Object.entries(myTickets).length;
+                myBooking.price = 0;
+                for (var i = 0; i < ticketsNumber; i++ ){
+                    myBooking.price = myBooking.price + Object.entries(myTickets)[i][1].price;
+                }
+                console.log(myBooking);
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ path('booking') }}',
+                    data: {
+                        price: myBooking.price
+                    },
+                    success: function () {
+                        console.log("Success")
+                    }
+                })
+            }
+            else if(stepNumber == 2 && stepDirection == 'forward'){
+
+
+            }
+        });
+
+        $("#booking-validate").on('click', function () {
+            $('form[name=book]').submit();
+            $('#payment-form').submit();
+        })
+        
+
+        function booking() {
+            this.price = 0;
+        }
+
+        function checkDate(ticketDate) {
+            var isValid = false;
+
+            if (ticketDate.length < 10){
+                isValid = false;
+                $("#ticketDate-feedback").show();
+                $('#book_ticketDate').addClass("invalid")
+
+            }
+            else{
+                isValid = true
+                $("#ticketDate-feedback").hide();
+                $('#book_ticketDate').removeClass("invalid")
+            }
+
+            return isValid
+        }
+
+    </script>
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Ticket;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,23 +17,28 @@ class TicketType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom :'
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Nom :'
             ])
             ->add('country', CountryType::class, [
-                'label' => 'Pays',
-                'preferred_choices' => ['FR', 'US', 'GB', 'CN', 'DE', 'ES', 'BE', 'IT', 'NL', 'JP']
+                'label' => 'Pays :',
+                'choice_translation_locale' => 'fr',
+                'preferred_choices' => [
+                    'FR']
             ])
             ->add('birthDate', DateType::class, [
-                'label' => 'Date de naissance',
+                'label' => 'Date de naissance :',
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['class' => 'datepickerBirthDate'],
                 'format' => 'dd-MM-yyyy'
             ])
-            ->add('reduction')
+            ->add('reduction', CheckboxType::class, [
+                'label' => 'Tarif réduit',
+                'required' => false
+            ])
         ;
     }
 

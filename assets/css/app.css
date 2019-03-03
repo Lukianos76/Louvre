@@ -1,6 +1,3 @@
-
-
-
 /* COMMON */
 
 * {
@@ -29,11 +26,12 @@ h2{
     text-transform: uppercase;
     color: #333333;
 }
-h3{
+h3, button.btn.btn-link{
     font-size: 1.5rem;
     font-weight: normal;
-    margin: 35px 0 0px 0;
     color: #333333;
+    margin:0;
+    padding:0;
 }
 
 .btn-primary{
@@ -47,6 +45,11 @@ h3{
 }
 .btn-primary:focus{
     box-shadow: 0 0 0 0.2rem #6b97b2;
+}
+.hidden{
+    visibility: hidden;
+    width:0;
+    height: 0;
 }
 
 /* HEADER */
@@ -74,8 +77,10 @@ footer a{
     color: #fff;
 }
 footer p{
-display: block;
+    display: block;
     line-height: 5rem;
+    color: #fff;
+    font-size: 0.8rem;
 
 }
 
@@ -154,6 +159,10 @@ ul.tickets{
     margin: 0 auto;
 
 }
+input.invalid{
+    border-color:#dc3545;
+}
+
 .nav-tabs .nav-link{
     border: none;
 }
@@ -166,9 +175,79 @@ ul.tickets{
     color: #333333;
 }
 .booking-header{
-    margin: 35px 0 0 0;
+    margin-top: 35px;
 }
 .booking-text{
     font-size: 1.25rem;
-    margin: 0 0 20px 0;
+    margin: 0;
+}
+.cart-label{
+    margin-top: 20px;
+}
+.coordonnees-row{
+    margin-top: 20px;
+}
+.card-header{
+    background-color: #333333;
+}
+.card-header button.btn.btn-link{
+    color: #FFFFFF;
+}
+.card{
+    border:none;
+    border-bottom: #333333 1px solid !important;
+}
+.btn-ticket{
+    margin-top: 20px;
+}
+.btn-delete-ticket{
+    margin-bottom: 20px;
+}
+.btn-add-ticket{
+ margin: 20px 0 20px
+}
+#smartwizard ul li{
+    width: 125px;
+    margin: 0 auto;
+}
+#smartwizard ul{
+    width: 500px;
+    margin: 0 auto;
+}
+.sw-btn-prev, .sw-btn-next {
+    color: #fff !important;
+}
+
+/* Stripe */
+
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+.StripeElement {
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+
+    padding: 10px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
 }

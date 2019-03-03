@@ -124,4 +124,33 @@ class Ticket
 
         return $this;
     }
+
+    public function getAge()
+    {
+        return date_diff(new \DateTime(), $this->birthDate);
+    }
+
+    public function getPrice()
+    {
+        $age = $this->getAge();
+        if ($this->getReduction()){
+            return 10;
+        }
+        elseif ($age >= 60)
+        {
+            return 12;
+        }
+        elseif ($age >= 12 && $age < 60)
+        {
+            return 16;
+        }
+        elseif ($age >= 4 && $age < 12)
+        {
+            return 8;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }

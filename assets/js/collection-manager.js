@@ -2,13 +2,13 @@ var $collectionHolder;
 
 // setup an "add a tag" link
 var $addTicketButton = $('<button type="button" class="add_ticket_link btn btn-success"><i class="fas fa-plus"></i> Ajouter un ticket</button>');
-var $newLinkLi = $('<li></li>').append($addTicketButton);
+var $newLinkLi = $('<div class="btn-add-ticket"></div>').append($addTicketButton);
 
 $(function() {
     // Get the ul that holds the collection of tags
-    $collectionHolder = $('ul.tickets');
+    $collectionHolder = $('.accordion#accordionTicket');
 
-    $collectionHolder.find('li').each(function() {
+    $collectionHolder.find('.collapse').each(function() {
         addTicketFormDeleteLink($(this));
     });
 
@@ -46,17 +46,18 @@ function addTicketForm($collectionHolder, $newLinkLi) {
     $collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<li></li>').append(newForm);
+    var $newFormLi = $('<div class="card"></div>').append(newForm);
     $newLinkLi.before($newFormLi);
 
 
     addTicketFormDeleteLink($newFormLi);
+
     $('.datepickerBirthDate').datepicker({
         format: 'dd-mm-yyyy',
         language: 'fr-FR',
         autoclose:true,
-        endDate: 'today',
         startDate: '01-01-1900',
+        endDate: '-4y',
         templates: {
             leftArrow: '<i class="fas fa-arrow-left"></i>',
             rightArrow: '<i class="fas fa-arrow-right"></i>'
@@ -66,8 +67,8 @@ function addTicketForm($collectionHolder, $newLinkLi) {
 }
 
 function addTicketFormDeleteLink($tagFormLi) {
-    var $removeFormButton = $('<button type="button" class="btn btn-danger"><i class="fas fa-minus"></i> Supprimer ce ticket</button>')
-    $tagFormLi.append($removeFormButton);
+    var $removeFormButton = $('<button type="button" class="btn btn-danger btn-delete-ticket"><i class="fas fa-minus"></i> Supprimer ce ticket</button>')
+    $tagFormLi.find('.collapse').append($removeFormButton);
 
     $removeFormButton.on('click', function(e) {
         // remove the li for the tag form
