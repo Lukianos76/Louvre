@@ -62,7 +62,7 @@
     <script>
 
 
-        $(function () {
+        $( document ).ready(function () {
             $("#firstName{{ form.vars.name }}-feedback").hide();
             $("#lastName{{ form.vars.name }}-feedback").hide();
             $("#birthDate{{ form.vars.name }}-feedback").hide();
@@ -87,6 +87,7 @@
                 myTickets.ticket{{ form.vars.name }} = ticket{{ form.vars.name }};
                 $('#collapse{{ form.vars.name }}').collapse('toggle')
                 console.log(myTickets)
+                console.log("test")
 
             }
 
@@ -107,9 +108,10 @@
             var isValid = false,
                 isValidFirstName = false,
                 isValidLastName = false,
-                isValidBirthDate = false
+                isValidBirthDate = false,
+                regexName = new RegExp("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$");
 
-            if (firstName.length < 5){
+            if (!regexName.test(firstName)){
                 isValidFirstName = false;
                 $("#firstName{{ form.vars.name }}-feedback").show();
                 $('#book_tickets_{{ form.vars.name }}_firstName').addClass("invalid")
@@ -120,7 +122,7 @@
                 $('#book_tickets_{{ form.vars.name }}_firstName').removeClass("invalid")
             }
 
-            if (lastName.length < 5){
+            if (!regexName.test(lastName)){
                 isValidLastName = false;
                 $("#lastName{{ form.vars.name }}-feedback").show();
                 $('#book_tickets_{{ form.vars.name }}_lastName').addClass("invalid")
@@ -163,19 +165,19 @@
 
         function getPrice(age, reduction){
             if (reduction){
-                return 10;
+                return 1000;
             }
             else if (age >= 60)
             {
-                return 12;
+                return 1200;
             }
             else if (age >= 12 && age < 60)
             {
-                return 16;
+                return 1600;
             }
             else if (age >= 4 && age < 12)
             {
-                return 8;
+                return 800;
             }
         }
 

@@ -1,36 +1,29 @@
 <div id="step-3" class="form-step">
-    <div class="booking-header">
-        <i class="fas fa-credit-card"></i>
-        <h2>Paiement</h2>
-        <script src="https://js.stripe.com/v3/"></script>
-
-        <form action="{{ path('booking') }}" method="post" id="payment-form">
-            <div class="form-row">
-                <label for="card-element">
-                    Credit or debit card
-                </label>
-                <div id="card-element">
-                    <!-- A Stripe Element will be inserted here. -->
-                </div>
-
-                <!-- Used to display form errors. -->
-                <div class="invalid-feedback" id="card-errors" role="alert"></div>
+<div class="booking-header">
+    <i class="fas fa-credit-card"></i>
+    <h2>Paiement</h2>
+    <script src="https://js.stripe.com/v3/"></script>
+        <div class="form-row">
+            <label for="card-element">
+                Credit or debit card
+            </label>
+            <div id="card-element">
             </div>
-        </form>
-        <button class="btn btn-primary sw-btn-prev">Précédent</button>
+
+            <div class="invalid-feedback" id="card-errors" role="alert"></div>
+        </div>
+
+        <a class="btn btn-primary sw-btn-prev">Précédent</a>
         <button class="btn btn-primary" id="sw-btn-next">Suivant</button>
-    </div>
+</div>
 </div>
 
-<script>
-    /*// Create a Stripe client.
-    var stripe = Stripe('pk_test_SMORmlDOTBFVbVXzxPySv0LI');
 
-    // Create an instance of Elements.
+<script>
+
+    var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
     var elements = stripe.elements();
 
-    // Custom styling can be passed to options when creating an Element.
-    // (Note that this demo uses a wider set of styles than the guide below.)
     var style = {
         base: {
             color: '#32325d',
@@ -42,18 +35,13 @@
             }
         },
         invalid: {
-            color: '#dc3545',
-            iconColor: '#dc3545'
+            color: '#fa755a',
+            iconColor: '#fa755a'
         }
     };
-
-    // Create an instance of the card Element.
     var card = elements.create('card', {style: style});
-
-    // Add an instance of the card Element into the `card-element` <div>.
     card.mount('#card-element');
 
-    // Handle real-time validation errors from the card Element.
     card.addEventListener('change', function(event) {
         var displayError = document.getElementById('card-errors');
         if (event.error) {
@@ -63,14 +51,13 @@
         }
     });
 
-    // Handle form submission.
-    var form = document.getElementById('payment-form');
+    var form = document.getElementById('booking');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
         stripe.createToken(card).then(function(result) {
             if (result.error) {
-                // Inform the user if there was an error.
+                // Inform the customer that there was an error.
                 var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = result.error.message;
             } else {
@@ -80,17 +67,23 @@
         });
     });
 
-    // Submit the form with the token ID.
     function stripeTokenHandler(token) {
         // Insert the token ID into the form so it gets submitted to the server
-        var form = document.getElementById('payment-form');
+        var form = document.getElementById('booking');
+        var priceInput = document.createElement('input');
+        priceInput.setAttribute('type', 'hidden');
+        priceInput.setAttribute('name', 'price');
+        priceInput.setAttribute('value', myBooking.price);
         var hiddenInput = document.createElement('input');
         hiddenInput.setAttribute('type', 'hidden');
         hiddenInput.setAttribute('name', 'stripeToken');
         hiddenInput.setAttribute('value', token.id);
         form.appendChild(hiddenInput);
+        form.appendChild(priceInput);
 
         // Submit the form
         form.submit();
-    }*/
+
+
+    }
 </script>

@@ -35,9 +35,11 @@
 
 
         <div>
+            {{ form_start(form, {'attr': {'id': 'booking'}}) }}
             {{ include('pages/step1.html.twig') }}
             {{ include('pages/step2.html.twig') }}
             {{ include('pages/step3.html.twig') }}
+            {{ form_end(form) }}
             {{ include('pages/step4.html.twig') }}
         </div>
     </div>
@@ -46,13 +48,13 @@
 
 {% block javascripts %}
 
-    <script src="https://js.stripe.com/v3/"></script>
-
     <script>
 
-        $(function () {
+        $( document ).ready(function () {
             $("#ticketDate-feedback").hide();
             $(".btn-toolbar").hide();
+            $("#step-2").hide();
+            $("#step-3").hide();
         })
 
 
@@ -79,27 +81,10 @@
                     myBooking.price = myBooking.price + Object.entries(myTickets)[i][1].price;
                 }
                 console.log(myBooking);
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ path('booking') }}',
-                    data: {
-                        price: myBooking.price
-                    },
-                    success: function () {
-                        console.log("Success")
-                    }
-                })
             }
             else if(stepNumber == 2 && stepDirection == 'forward'){
-
-
             }
         });
-
-        $("#booking-validate").on('click', function () {
-            $('form[name=book]').submit();
-            $('#payment-form').submit();
-        })
         
 
         function booking() {

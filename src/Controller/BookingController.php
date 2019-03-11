@@ -29,12 +29,21 @@ class BookingController extends AbstractController
         $form->handleRequest($request);
 
 
-        if($form->isSubmitted() && $form->isValid())
+        if($form->isSubmitted() && $form->isValid() && isset($_POST['stripeToken']))
         {
+            \Stripe\Stripe::setApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+            $token = $_POST['stripeToken'];
+            $charge = \Stripe\Charge::create([
+                'amount' => $_POST['price'],
+                'currency' => 'eur',
+                'description' => 'Paiement de test',
+                'source' => $token,
+            ]);
 
             $this->em->persist($booking);
             $this->em->flush();
         }
+
         return $this->render('pages/booking.html.twig', [
             'booking' => $booking,
             'form' => $form->createView()
@@ -42,6 +51,9 @@ class BookingController extends AbstractController
 
 
     }
+
+
+
 
 
 
