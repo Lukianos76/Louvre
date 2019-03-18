@@ -26,21 +26,16 @@
                     <div class="circle-label">Paiement</div>
                 </a></li>
             <li>
-                <a href="#step-4">
-                    <div class="circle">4</div>
-                    <br/>
-                    <div class="circle-label">Confirmation</div>
-                </a></li>
         </ul>
 
 
         <div>
             {{ form_start(form, {'attr': {'id': 'booking'}}) }}
-            {{ include('pages/step1.html.twig') }}
-            {{ include('pages/step2.html.twig') }}
-            {{ include('pages/step3.html.twig') }}
+            {{ include('formstep/step1.html.twig') }}
+            {{ include('formstep/step2.html.twig') }}
+            {{ include('formstep/step3.html.twig') }}
+            <div class="hidden">{{ form_rest(form) }}</div>
             {{ form_end(form) }}
-            {{ include('pages/step4.html.twig') }}
         </div>
     </div>
 </div>
@@ -77,10 +72,11 @@
                 myBooking.tickets = myTickets;
                 var ticketsNumber = Object.entries(myTickets).length;
                 myBooking.price = 0;
+                $('#total-price').append(myBooking.price / 100)
                 for (var i = 0; i < ticketsNumber; i++ ){
                     myBooking.price = myBooking.price + Object.entries(myTickets)[i][1].price;
                 }
-                console.log(myBooking);
+                $('#total-price').text(myBooking.price / 100)
             }
             else if(stepNumber == 2 && stepDirection == 'forward'){
             }

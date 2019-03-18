@@ -1,253 +1,273 @@
-/* COMMON */
-
 * {
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
-html{
-    height: 100%;
-}
-body{
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    padding-bottom: 6rem;
+html {
+    height:100%;
 }
 
-p{
-    margin: 0;
-    color: #333333;
+body {
+    margin:0;
+    min-height:100%;
+    padding:0 0 6rem;
+    position:relative;
 }
-h2{
-    font-size: 2.25rem;
-    font-weight: normal;
-    text-transform: uppercase;
-    color: #333333;
+
+p {
+    color:#333;
+    margin:0;
 }
-h3, button.btn.btn-link{
-    font-size: 1.5rem;
-    font-weight: normal;
-    color: #333333;
+
+h2 {
+    color:#333;
+    font-size:2.25rem;
+    font-weight:400;
+    text-transform:uppercase;
+}
+
+h3,button.btn.btn-link {
+    color:#333;
+    font-size:1.5rem;
+    font-weight:400;
     margin:0;
     padding:0;
 }
 
-.btn-primary{
-    background-color: #83B6D6;
-    border-color: #83B6D6;
+.btn-primary {
+    background-color:#83B6D6;
+    border-color:#83B6D6;
 }
-.btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active{
-    background-color: #6b97b2;
-    border-color: #6b97b2;
 
+.btn-primary:hover,.btn-primary:not(:disabled):not(.disabled):active {
+    background-color:#6b97b2;
+    border-color:#6b97b2;
 }
-.btn-primary:focus{
-    box-shadow: 0 0 0 0.2rem #6b97b2;
+
+.btn-primary:focus {
+    box-shadow:0 0 0 .2rem #6b97b2;
 }
-.hidden{
-    visibility: hidden;
+
+.hidden {
+    height:0;
+    visibility:hidden;
     width:0;
-    height: 0;
 }
 
-/* HEADER */
-
-header{
-    border-bottom: 1px solid #83B6D6;
-    padding: 15px;
-}
-.lead{
-    font-size: 1.3rem;
-    text-align: center;
+header {
+    border-bottom:1px solid #83B6D6;
+    padding:15px;
 }
 
-/* FOOTER */
-footer{
-    text-align: center;
-    background: #333333;
-    color: #fff;
-    position: absolute;
-    bottom: 0;
-    left:0;
-    right: 0;
-}
-footer a{
-    color: #fff;
-}
-footer p{
-    display: block;
-    line-height: 5rem;
-    color: #fff;
-    font-size: 0.8rem;
-
-}
-
-
-
-/* ACCUEIL */
-
-#home{
-    text-align: center;
-    padding: 20px 0;
-}
-#home h1 {
-    margin: 7rem 0 0 0;
-}
-#home .home-paragraphe{
-    margin: 3rem 0 0 0;
-}
-#home .btn{
-    margin: 3rem 0;
-}
-#btn-order{
-    font-size: 1.75rem;
-    padding: 10px 50px;
-    text-transform: uppercase;
-}
-
-/* CALENDAR */
-
-.dow, .datepicker-switch{
-    text-transform: uppercase !important;
-}
-
-/* FORM */
-.nav-tabs{
-    line-height: 10px;
-    text-align: center;
-    margin: 20px auto !important;
-}
-.circle{
-    margin:0 auto;
-    width:30px;
-    background:none;
-    border: 2px #333333 solid;
-    height:30px;
+.lead {
+    font-size:1.3rem;
     text-align:center;
-    border-radius:30px;
-    line-height: 25px;
-    color: #000;
 }
-.active .circle{
-    background-color: #333333;
-    color: #ffffff;
-}
-.circle-label{
-    color: #000;
-}
-.form-step{
-    text-align: center;
-}
-.form-step small{
-    text-align: left;
-}
-.form-group{
-    margin-bottom: 0;
-}
-.form-control:focus{
-    border-color: #83B6D6;
-    box-shadow: 0 0 0 0.2rem #83B6D6
-}
-ul.tickets{
-    list-style: none;
-    padding: 0;
-}
-.nav-tabs{
-    border:none;
-    margin: 0 auto;
 
+footer {
+    background:#333;
+    bottom:0;
+    color:#fff;
+    left:0;
+    position:absolute;
+    right:0;
+    text-align:center;
 }
-input.invalid{
+
+footer a {
+    color:#fff;
+}
+
+footer p {
+    color:#fff;
+    display:block;
+    font-size:.8rem;
+    line-height:5rem;
+}
+
+#home {
+    padding:20px 0;
+    text-align:center;
+}
+
+#home h1 {
+    margin:7rem 0 0;
+}
+
+#home .home-paragraphe {
+    margin:3rem 0 0;
+}
+
+#home .btn {
+    margin:3rem 0;
+}
+
+#btn-order {
+    font-size:1.75rem;
+    padding:10px 50px;
+    text-transform:uppercase;
+}
+
+.dow,.datepicker-switch {
+    text-transform:uppercase!important;
+}
+
+.nav-tabs {
+    border:none;
+    line-height:10px;
+    margin:20px auto!important;
+    text-align:center;
+}
+
+.circle {
+    background:none;
+    border:2px #333 solid;
+    border-radius:30px;
+    color:#000;
+    height:30px;
+    line-height:25px;
+    margin:0 auto;
+    text-align:center;
+    width:30px;
+}
+
+.active .circle {
+    background-color:#333;
+    color:#fff;
+}
+
+.circle-label {
+    color:#000;
+}
+
+.form-step {
+    text-align:center;
+}
+
+.form-step small {
+    text-align:left;
+}
+
+.form-group {
+    margin-bottom:0;
+}
+
+.form-control:focus {
+    border-color:#83B6D6;
+    box-shadow:0 0 0 .2rem #83B6D6;
+}
+
+ul.tickets {
+    list-style:none;
+    padding:0;
+}
+
+input.invalid {
     border-color:#dc3545;
 }
 
-.nav-tabs .nav-link{
-    border: none;
+.booking-header i {
+    color:#333;
+    font-size:2.75rem;
+    margin-bottom:10px;
 }
-.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
-    border: none;
+
+.booking-header {
+    margin-top:35px;
 }
-.booking-header i{
-    font-size: 2.75rem;
-    margin-bottom: 10px;
-    color: #333333;
+
+.booking-text {
+    font-size:1.25rem;
+    margin:0;
 }
-.booking-header{
-    margin-top: 35px;
+
+.card-header {
+    background-color:#333;
 }
-.booking-text{
-    font-size: 1.25rem;
-    margin: 0;
+
+.card-header button.btn.btn-link {
+    color:#FFF;
 }
-.cart-label{
-    margin-top: 20px;
-}
-.coordonnees-row{
-    margin-top: 20px;
-}
-.card-header{
-    background-color: #333333;
-}
-.card-header button.btn.btn-link{
-    color: #FFFFFF;
-}
-.card{
+
+.card {
     border:none;
-    border-bottom: #333333 1px solid !important;
-}
-.btn-ticket{
-    margin-top: 20px;
-}
-.btn-delete-ticket{
-    margin-bottom: 20px;
-}
-.btn-add-ticket{
- margin: 20px 0 20px
-}
-#smartwizard ul li{
-    width: 125px;
-    margin: 0 auto;
-}
-#smartwizard ul{
-    width: 500px;
-    margin: 0 auto;
-}
-.sw-btn-prev, .sw-btn-next {
-    color: #fff !important;
+    border-bottom:#333 1px solid!important;
 }
 
-/* Stripe */
+.btn-delete-ticket {
+    margin-bottom:20px;
+}
 
-/**
- * The CSS shown here will not be introduced in the Quickstart guide, but shows
- * how you can use CSS to style your Element's container.
- */
+.btn-add-ticket {
+    margin:20px 0;
+}
+
+#smartwizard ul li {
+    margin:0 auto;
+    width:125px;
+}
+
+#smartwizard ul {
+    margin:0 auto;
+    width:450px;
+}
+
+.sw-btn-prev,.sw-btn-next {
+    color:#fff!important;
+}
+
+.booking-nav {
+    margin-top:40px;
+}
+
 .StripeElement {
-    box-sizing: border-box;
-    width: 100%;
-    height: 40px;
-
-    padding: 10px 12px;
-
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background-color: white;
-
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
+    -webkit-transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    background-clip:padding-box;
+    background-color:#fff;
+    border:1px solid #ced4da;
+    border-radius:.25em;
+    box-shadow:0 1px 3px 0 #e6ebf1;
+    box-sizing:border-box;
+    color:#495057;
+    font-size:1rem;
+    line-height:1.5;
+    padding:.375rem .75rem;
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    width:100%;
 }
 
 .StripeElement--focus {
-    box-shadow: 0 1px 3px 0 #cfd7df;
+    box-shadow:0 1px 3px 0 #cfd7df;
 }
 
 .StripeElement--invalid {
-    border-color: #fa755a;
+    border-color:#fa755a;
 }
 
 .StripeElement--webkit-autofill {
-    background-color: #fefde5 !important;
+    background-color:#fefde5!important;
+}
+
+.nav-tabs .nav-link,.nav-tabs .nav-link:focus,.nav-tabs .nav-link:hover {
+    border:none;
+}
+
+.cart-label,.coordonnees-row,.btn-ticket {
+    margin-top:20px;
+}
+#confirm{
+    padding:20px 0;
+    text-align: center;
+}
+#confirm .btn{
+    margin-top: 20px;
+}
+#confirm-header i{
+    font-size: 2em;
+}
+.price-text{
+    margin-top:20px;
+    font-size:1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
 }
