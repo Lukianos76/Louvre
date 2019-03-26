@@ -8,13 +8,17 @@
         <h3>Première étape :</h3>
         <p class="booking-text">Choissisez la date de votre/vos billet(s)</p>
     </div>
-
+    <div class="input-div col-sm-12  col-md-8">
     {{ form_row(form.ticketDate) }}
+
     <small id="tickedDateHelpBlock" class="form-text text-muted">
         <i class="fas fa-exclamation-circle"></i>
         Le musée est ouvert tous les jours sauf le mardi, le 1er mai, 1er novembre et 25 décembre.
     </small>
+
     <div class="invalid-feedback" id="ticketDate-feedback">Veuillez sélectionner une date</div>
+    </div>
+    <div class="input-div col-sm-12 col-md-8">
     <div class="cart-label">
         <h3>Deuxième étape :</h3>
         <p class="booking-text">Choissisez le type de billet(s)</p>
@@ -24,6 +28,7 @@
         <i class="fas fa-exclamation-circle"></i>
         Il est impossible de commander un billet "Journée" pour le jour même aprés 14h.
     </small>
+    </div>
     <div class="booking-nav">
     <a class="btn btn-primary sw-btn-next">Suivant</a>
     </div>

@@ -66,6 +66,7 @@ header {
 
 footer {
     background:#333;
+    width: 100%;
     bottom:0;
     color:#fff;
     left:0;
@@ -77,7 +78,11 @@ footer {
 footer a {
     color:#fff;
 }
-
+@media screen and (max-width: 490px){
+    footer p {
+        font-size: .5rem !important;
+    }
+}
 footer p {
     color:#fff;
     display:block;
@@ -91,11 +96,13 @@ footer p {
 }
 
 #home h1 {
-    margin:7rem 0 0;
+    margin:7rem 5px 0;
+    font-size: 2rem;
 }
 
 #home .home-paragraphe {
-    margin:3rem 0 0;
+    margin:3rem auto 0;
+
 }
 
 #home .btn {
@@ -103,8 +110,8 @@ footer p {
 }
 
 #btn-order {
-    font-size:1.75rem;
-    padding:10px 50px;
+    font-size:1.5rem;
+    padding:10px 25px;
     text-transform:uppercase;
 }
 
@@ -165,6 +172,9 @@ ul.tickets {
 input.invalid {
     border-color:#dc3545;
 }
+.input-div{
+    margin: 0 auto;
+}
 
 .booking-header i {
     color:#333;
@@ -201,7 +211,15 @@ input.invalid {
 .btn-add-ticket {
     margin:20px 0;
 }
+@media screen and (max-width:500px){
+    #smartwizard ul li {
+        width:90px !important;
+    }
 
+    #smartwizard ul {
+        width:280px !important;
+    }
+}
 #smartwizard ul li {
     margin:0 auto;
     width:125px;
@@ -210,6 +228,9 @@ input.invalid {
 #smartwizard ul {
     margin:0 auto;
     width:450px;
+}
+.nav-link{
+    padding: 0 !important;
 }
 
 .sw-btn-prev,.sw-btn-next {

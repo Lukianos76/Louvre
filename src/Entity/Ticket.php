@@ -127,7 +127,9 @@ class Ticket
 
     public function getAge()
     {
-        return date_diff(new \DateTime(), $this->birthDate);
+        $today = new \DateTime();
+        $age = $today->diff($this->birthDate, true)->y;
+        return $age;
     }
 
     public function getPrice()

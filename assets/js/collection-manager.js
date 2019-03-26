@@ -67,11 +67,13 @@ function addTicketForm($collectionHolder, $newLinkLi) {
 }
 
 function addTicketFormDeleteLink($tagFormLi) {
-    var $removeFormButton = $('<button type="button" class="btn btn-danger btn-delete-ticket"><i class="fas fa-minus"></i> Supprimer ce ticket</button>')
+    var $removeFormButton = $('<button type="button"  class="btn btn-danger btn-delete-ticket"><i class="fas fa-minus"></i> Supprimer ce ticket</button>')
     $tagFormLi.find('.collapse').append($removeFormButton);
 
     $removeFormButton.on('click', function(e) {
         // remove the li for the tag form
+
         $tagFormLi.remove();
+
     });
 }

@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * @property \Swift_Mailer mailer
+ */
 class BookingController extends AbstractController
 {
 
@@ -46,9 +50,10 @@ class BookingController extends AbstractController
             $this->em->persist($booking);
             $this->em->flush();
 
-            $message = (new \Swift_Message('Hello Email'))
-                ->setFrom('noreply@louvre.fr')
+            $message = (new \Swift_Message())
+                ->setFrom('noreply@luke-maury.fr')
                 ->setTo($booking->getEmail())
+                ->setSubject('Confirmation de votre commande')
                 ->setBody(
                     $this->renderView(
                         'mail/mail.html.twig',

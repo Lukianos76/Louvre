@@ -14,7 +14,7 @@
             <h3>
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ form.vars.name }}"
                         aria-expanded="true" aria-controls="collapse{{ form.vars.name }}">
-                Billet N°{{ form.vars.name }}
+                <span id="ticket{{ form.vars.name }}-name">Nouveau billet</span>
                 </button>
             </h3>
         </div>
@@ -68,15 +68,17 @@
             $("#birthDate{{ form.vars.name }}-feedback").hide();
         });
 
-        var myTickets = []
+        if(myTickets == undefined){
+            var myTickets = []
+        }
 
         $(".btn-ticket").on('click', function (e) {
 
             if(checkTicket($('#book_tickets_{{ form.vars.name }}_firstName').val(),
                 $('#book_tickets_{{ form.vars.name }}_lastName').val(),
                 $('#book_tickets_{{ form.vars.name }}_birthDate').val()
-            )){
-
+            ))
+            {
                 var ticket{{ form.vars.name }} = new ticket (
                     $('#book_tickets_{{ form.vars.name }}_firstName').val(),
                     $('#book_tickets_{{ form.vars.name }}_lastName').val(),
@@ -84,14 +86,32 @@
                     $('#book_tickets_{{ form.vars.name }}_birthDate').val(),
                     $('#book_tickets_{{ form.vars.name }}_reduction').is(':checked')
                 );
-                myTickets.ticket{{ form.vars.name }} = ticket{{ form.vars.name }};
+                if (myTickets.findIndex(i => i.ticket{{ form.vars.name }}) === -1)
+                {
+                    myTickets.push({
+                        'ticket{{ form.vars.name }}': ticket{{ form.vars.name }}
+                    })
+                    $('#ticket{{ form.vars.name }}-name').text("Billet de " + ticket{{ form.vars.name }}.lastName + " " + ticket{{ form.vars.name }}.firstName)
+                }
+                else
+                {
+                    myTickets.splice(myTickets.findIndex(i => i.ticket{{form.vars.name}}),  1);
+                    myTickets.push({
+                        'ticket{{ form.vars.name }}': ticket{{ form.vars.name }}
+                    })
+                    $('#ticket{{ form.vars.name }}-name').text("Billet de " + ticket{{ form.vars.name }}.lastName + " " + ticket{{ form.vars.name }}.firstName)
+                }
+
+
+
+
+                $('#collapse{{ form.vars.name }} > .btn-delete-ticket').attr(
+                    'onClick',
+                    'myTickets.splice(myTickets.findIndex(i => i.ticket{{form.vars.name}}),  1);'
+                );
                 $('#collapse{{ form.vars.name }}').collapse('toggle')
                 console.log(myTickets)
-                console.log("test")
-
             }
-
-
         });
 
         function ticket(firstName, lastName, country, birthDate, reduction ){
