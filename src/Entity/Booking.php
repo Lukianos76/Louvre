@@ -43,9 +43,16 @@ class Booking
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $orderNumber;
+
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->orderNumber = uniqid();
     }
 
     public function getId(): ?int
@@ -116,6 +123,18 @@ class Booking
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getOrderNumber()
+    {
+        return $this->orderNumber;
+    }
+
+    public function setOrderNumber(string $orderNumber): self
+    {
+        $this->orderNumber = $orderNumber;
 
         return $this;
     }

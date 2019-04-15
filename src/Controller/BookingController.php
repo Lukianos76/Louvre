@@ -39,13 +39,22 @@ class BookingController extends AbstractController
             \Stripe\Stripe::setApiKey("sk_test_q5wsT6LDmB3aM4eo8fvcm5e5");
             $token = $_POST['stripeToken'];
             $price = $_POST['price'];
+            try {
+                $charge = \Stripe\Charge::create([
+                    'amount' => $price,
+                    'currency' => 'eur',
+                    'description' => 'Paiement de test',
+                    'source'  => $token,
+                    'statement_descriptor' => 'Billets du Louvre'
+                ]);
 
-            $charge = \Stripe\Charge::create([
-                'amount' => $price,
-                'currency' => 'eur',
-                'description' => 'Paiement de test',
-                'source'  => $token,
-            ]);
+            } catch(\Stripe\Error\Card $e) {
+                return $this->render('pages/error.html.twig', [
+                    'e' => $e
+                ]);
+            }
+
+
 
             $this->em->persist($booking);
             $this->em->flush();

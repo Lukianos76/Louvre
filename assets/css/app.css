@@ -176,7 +176,7 @@ input.invalid {
     margin: 0 auto;
 }
 
-.booking-header i {
+.booking-header i, #confirm-header i {
     color:#333;
     font-size:2.75rem;
     margin-bottom:10px;
@@ -283,12 +283,22 @@ input.invalid {
 #confirm .btn{
     margin-top: 20px;
 }
-#confirm-header i{
-    font-size: 2em;
-}
 .price-text{
     margin-top:20px;
     font-size:1.5em;
     font-weight: bold;
     text-transform: uppercase;
+}
+.btn-link{
+    width: 100%;
+}
+.btn-link .ticket-header-left{
+    text-align: center;
+}
+.btn-link .ticket-header-right{
+    float:right;
+    line-height: 1.5;
+}
+.btn-link i{
+    margin-left: 15px;
 }

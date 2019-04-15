@@ -21,9 +21,10 @@ require('../css/app.css');
 $('.datepickerTicketDate').datepicker({
     format: 'dd-mm-yyyy',
     language: 'fr-FR',
-    autoclose:true,
+    autoclose:false,
     daysOfWeekDisabled: '2',
     startDate: 'today',
+    endDate: '+2y',
     templates: {
         leftArrow: '<i class="fas fa-arrow-left"></i>',
         rightArrow: '<i class="fas fa-arrow-right"></i>'

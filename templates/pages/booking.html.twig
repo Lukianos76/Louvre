@@ -48,6 +48,7 @@
         $( document ).ready(function () {
             $("#ticketDate-feedback").hide();
             $("#myTickets-feedback").hide();
+            $("#type-feedback").hide();
             $(".btn-toolbar").hide();
             $("#step-2").hide();
             $("#step-3").hide();
@@ -58,7 +59,7 @@
 
         $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
             if (stepNumber == 0 && stepDirection == 'forward'){
-                if(checkDate($('#book_ticketDate').val()))
+                if(checkDate($('#book_ticketDate').val(),$('#book_type').val()))
                 {
                     myBooking.ticketDate = $('#book_ticketDate').val();
                     myBooking.type = $('#book_type').val();
@@ -98,19 +99,50 @@
             this.price = 0;
         }
 
-        function checkDate(ticketDate) {
+        function checkDate(ticketDate, ticketType) {
             var isValid = false;
+            var  re = /(0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-([12]\d{3})/;
+            $("#type-feedback").hide();
+            $('#book_type').removeClass("invalid")
+            $("#ticketDate-feedback").hide();
+            $('#book_ticketDate').removeClass("invalid")
 
-            if (ticketDate.length < 10){
-                isValid = false;
-                $("#ticketDate-feedback").show();
-                $('#book_ticketDate').addClass("invalid")
+            if (re.test(ticketDate)){
+                var dateStringConvert = ticketDate[3] + ticketDate[4] + ticketDate[2] + ticketDate[0] +
+                    ticketDate[1] + ticketDate[5] + ticketDate[6] + ticketDate[7] + ticketDate[8] + ticketDate[9];
+                var dateString = new Date(Date.parse(dateStringConvert));
+                if(dateString.getDay() === 2 ||
+                    (dateString.getDate() === 1 && dateString.getMonth() === 4) ||
+                    (dateString.getDate() === 1 && dateString.getMonth() === 10) ||
+                    (dateString.getDate() === 25 && dateString.getMonth() === 11))
+                {
+
+                    isValid = false;
+                    $("#ticketDate-feedback").show();
+                    $('#book_ticketDate').addClass("invalid")
+
+                }else{
+                    var today = new Date();
+                    if(ticketType === "0" && (dateString.getFullYear() === today.getFullYear() && dateString.getMonth() === today.getMonth() && dateString.getDate() === today.getDate() && today.getHours() >= 14) )
+                    {
+                        isValid = false
+                        $("#type-feedback").show();
+                        $('#book_type').addClass("invalid")
+                    }else
+                    {
+                        isValid = true
+                        $("#ticketDate-feedback").hide();
+                        $('#book_ticketDate').removeClass("invalid")
+                        $("#type-feedback").hide();
+                        $('#book_type').removeClass("invalid")
+                    }
+                }
 
             }
             else{
-                isValid = true
-                $("#ticketDate-feedback").hide();
-                $('#book_ticketDate').removeClass("invalid")
+                isValid = false;
+                $("#ticketDate-feedback").show();
+                $('#book_ticketDate').addClass("invalid")
             }
 
             return isValid

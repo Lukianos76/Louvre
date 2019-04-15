@@ -55,7 +55,7 @@ function addTicketForm($collectionHolder, $newLinkLi) {
     $('.datepickerBirthDate').datepicker({
         format: 'dd-mm-yyyy',
         language: 'fr-FR',
-        autoclose:true,
+        autoclose:false,
         startDate: '01-01-1900',
         endDate: '-4y',
         templates: {

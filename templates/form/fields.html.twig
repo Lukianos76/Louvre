@@ -1,21 +1,15 @@
 {% use 'bootstrap_4_layout.html.twig' %}
 
-{% block date_widget %}
-    <div class="input-group">
-        {{ parent() }}
-    <div class="input-group-append">
-        <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar"></i></span>
-    </div>
-    </div>
-{% endblock %}
+
 
 {% block _book_tickets_entry_widget %}
         <div class="card-header" id="heading{{ form.vars.name }}">
             <h3>
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ form.vars.name }}"
-                        aria-expanded="true" aria-controls="collapse{{ form.vars.name }}">
-                <span id="ticket{{ form.vars.name }}-name">Nouveau billet</span>
-                </button>
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ form.vars.name }}"
+                            aria-expanded="true" aria-controls="collapse{{ form.vars.name }}">
+                        <span class="ticket-header-left"><span id="ticket{{ form.vars.name }}-name">Nouveau billet</span></span>
+                        <span class="ticket-header-right"><span id="ticket{{ form.vars.name }}-price"></span><i class="fas fa-caret-down"></i></span>
+                    </button>
             </h3>
         </div>
         <div id="collapse{{ form.vars.name }}" class="collapse show" aria-labelledby="heading{{ form.vars.name }}"
@@ -37,7 +31,11 @@
                     </div>
                     <div class="col-md-6">
                         {{ form_row(form.birthDate) }}
-                        <div class="invalid-feedback" id="birthDate{{ form.vars.name }}-feedback">Veuillez sélectionner une date</div>
+                        <small id="tickedDateHelpBlock" class="form-text text-muted">
+                            <i class="fas fa-exclamation-circle"></i>
+                            La date doit être au format JJ-MM-AAAA <br>
+                        </small>
+                        <div class="invalid-feedback" id="birthDate{{ form.vars.name }}-feedback">Veuillez sélectionner une date valide</div>
                     </div>
                 </div>
                 <div class="row justify-content-center coordonnees-row">
@@ -73,6 +71,12 @@
         }
 
         $(".btn-ticket").on('click', function (e) {
+            $("#firstName{{ form.vars.name }}-feedback").hide();
+            $("#lastName{{ form.vars.name }}-feedback").hide();
+            $("#birthDate{{ form.vars.name }}-feedback").hide();
+            $('#book_tickets_{{ form.vars.name }}_firstName').removeClass("invalid")
+            $('#book_tickets_{{ form.vars.name }}_lastName').removeClass("invalid")
+            $('#book_tickets_{{ form.vars.name }}_birthDate').removeClass("invalid")
 
             if(checkTicket($('#book_tickets_{{ form.vars.name }}_firstName').val(),
                 $('#book_tickets_{{ form.vars.name }}_lastName').val(),
@@ -92,6 +96,7 @@
                         'ticket{{ form.vars.name }}': ticket{{ form.vars.name }}
                     })
                     $('#ticket{{ form.vars.name }}-name').text("Billet de " + ticket{{ form.vars.name }}.lastName + " " + ticket{{ form.vars.name }}.firstName)
+                    $('#ticket{{ form.vars.name }}-price').text("Prix : " + ticket{{ form.vars.name }}.price/100 + " €")
                 }
                 else
                 {
@@ -100,6 +105,7 @@
                         'ticket{{ form.vars.name }}': ticket{{ form.vars.name }}
                     })
                     $('#ticket{{ form.vars.name }}-name').text("Billet de " + ticket{{ form.vars.name }}.lastName + " " + ticket{{ form.vars.name }}.firstName)
+                    $('#ticket{{ form.vars.name }}-price').text("Prix : " + ticket{{ form.vars.name }}.price/100 + " €")
                 }
 
 
@@ -129,7 +135,8 @@
                 isValidFirstName = false,
                 isValidLastName = false,
                 isValidBirthDate = false,
-                regexName = new RegExp("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$");
+                regexName = new RegExp("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"),
+                regexDate = /(0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-([12]\d{3})/;
 
             if (!regexName.test(firstName)){
                 isValidFirstName = false;
@@ -153,7 +160,7 @@
                 $('#book_tickets_{{ form.vars.name }}_lastName').removeClass("invalid")
             }
 
-            if (birthDate.length < 10){
+            if (!regexDate.test(birthDate)){
                 isValidBirthDate = false;
                 $("#birthDate{{ form.vars.name }}-feedback").show();
                 $('#book_tickets_{{ form.vars.name }}_birthDate').addClass("invalid")
@@ -172,8 +179,8 @@
 
         function getAge(dateString) {
             var today = new Date();
-            var dateStringConvert = dateString[3] + dateString[4] + dateString[2] + dateString[0] +
-                dateString[1] + dateString[5] + dateString[6] + dateString[7] + dateString[8] + dateString[9];
+            var dateStringConvert = dateString[3] + dateString[4] + "/" + dateString[0] +
+                dateString[1] + "/" + dateString[6] + dateString[7] + dateString[8] + dateString[9];
             var birthDate = new Date(Date.parse(dateStringConvert));
             var age = today.getFullYear() - birthDate.getFullYear();
             var m = today.getMonth() - birthDate.getMonth();
@@ -184,7 +191,11 @@
         };
 
         function getPrice(age, reduction){
-            if (reduction){
+            if (age >= 4 && age < 12)
+            {
+                return 800;
+            }
+            else if (reduction){
                 return 1000;
             }
             else if (age >= 60)
@@ -195,10 +206,7 @@
             {
                 return 1600;
             }
-            else if (age >= 4 && age < 12)
-            {
-                return 800;
-            }
+
         }
 
 

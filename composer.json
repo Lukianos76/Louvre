@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "sensio/framework-extra-bundle": "^5.1",
-        "stripe/stripe-php": "^6.30",
+        "stripe/stripe-php": "^6.31",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
@@ -30,8 +30,11 @@
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
+        "symfony/browser-kit": "4.2.*",
+        "symfony/css-selector": "4.2.*",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "4.2.*",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*",
         "symfony/web-server-bundle": "4.2.*"
