@@ -17,12 +17,16 @@ require('../js/collection-manager.js');
 
 require('../css/app.css');
 
-
 $('.datepickerTicketDate').datepicker({
     format: 'dd-mm-yyyy',
     language: 'fr-FR',
-    autoclose:false,
+    autoclose: false,
     daysOfWeekDisabled: '2',
+    datesDisabled: ['01-05-2019', '01-11-2019', '25-12-2019',
+                    '01-05-2020', '01-11-2020', '25-12-2020',
+                    '01-05-2021', '01-11-2021', '25-12-2021',
+                    '01-05-2022', '01-11-2022', '25-12-2022'],
+    disableTouchKeyboard: true,
     startDate: 'today',
     endDate: '+2y',
     templates: {

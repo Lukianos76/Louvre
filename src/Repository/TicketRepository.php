@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Booking;
 use App\Entity\Ticket;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -17,6 +18,18 @@ class TicketRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Ticket::class);
+    }
+
+    public function verifyRemainingTicket($ticketDate)
+    {
+        $qb = $this->createQueryBuilder('t');
+
+        $qb ->select($qb->expr()->count('t'))
+            ->innerJoin('t.booking', 'b', 'WITH', 't.booking = b.id')
+            ->where('b.ticketDate = :ticketDate')
+            ->setParameter('ticketDate', $ticketDate);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     // /**

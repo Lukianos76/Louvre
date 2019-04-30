@@ -63,7 +63,6 @@
                 {
                     myBooking.ticketDate = $('#book_ticketDate').val();
                     myBooking.type = $('#book_type').val();
-                    console.log(myBooking);
                 }
                 else{
                     e.preventDefault();
@@ -84,7 +83,6 @@
 
                     for (var i = 0; i < ticketsNumber; i++) {
                         ticketName = Object.keys(Object.entries(myTickets)[i][1])[0]
-                        console.log(ticketName)
                         myBooking.price = myBooking.price + Object.entries(myTickets)[i][1][ticketName].price;
                     }
                     $('#total-price').text(myBooking.price / 100)
@@ -111,18 +109,7 @@
                 var dateStringConvert = ticketDate[3] + ticketDate[4] + ticketDate[2] + ticketDate[0] +
                     ticketDate[1] + ticketDate[5] + ticketDate[6] + ticketDate[7] + ticketDate[8] + ticketDate[9];
                 var dateString = new Date(Date.parse(dateStringConvert));
-                if(dateString.getDay() === 2 ||
-                    (dateString.getDate() === 1 && dateString.getMonth() === 4) ||
-                    (dateString.getDate() === 1 && dateString.getMonth() === 10) ||
-                    (dateString.getDate() === 25 && dateString.getMonth() === 11))
-                {
-
-                    isValid = false;
-                    $("#ticketDate-feedback").show();
-                    $('#book_ticketDate').addClass("invalid")
-
-                }else{
-                    var today = new Date();
+                var today = new Date();
                     if(ticketType === "0" && (dateString.getFullYear() === today.getFullYear() && dateString.getMonth() === today.getMonth() && dateString.getDate() === today.getDate() && today.getHours() >= 14) )
                     {
                         isValid = false
@@ -137,8 +124,6 @@
                         $('#book_type').removeClass("invalid")
                     }
                 }
-
-            }
             else{
                 isValid = false;
                 $("#ticketDate-feedback").show();

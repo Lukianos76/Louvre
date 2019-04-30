@@ -20,7 +20,7 @@ class BookType extends AbstractType
                 'label' => ' ',
                 'widget' => 'single_text',
                 'html5' => false,
-                'attr' => ['class' => 'datepickerTicketDate'],
+                'attr' => ['class' => 'datepickerTicketDate', 'onkeydown' => "return false"],
                 'format' => 'dd-MM-yyyy'
 
             ])
