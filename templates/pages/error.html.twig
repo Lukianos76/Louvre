@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Erreur dans votre commande' %}
+
+{% block body %}
+    <div id="confirm" class="container">
+        <div id="confirm-header">
+            <i class="fas fa-times"></i>
+            <h2>Votre commande a échoué</h2>
+        </div>
+        <p>Une erreur est survenu lors du paiement de vos billets</p>
+        <p>Erreur : {{ e.message }}</p>
+
+        <a class="btn btn-primary" href="{{ path('home') }}">Retourner a l'accueil</a>
+        <a class="btn btn-primary" href="{{ path('booking') }}">Réessayer</a>
+    </div>
+{% endblock %}

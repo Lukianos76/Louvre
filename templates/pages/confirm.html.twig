@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Confirmation de votre commande' %}
+
+{% block body %}
+    <div id="confirm" class="container">
+        <div id="confirm-header">
+                <i class="fas fa-check"></i>
+            <h2>Votre commande a été effectué avec succés</h2>
+        </div>
+        <p>Un email a été envoyé à {{ booking.email }} avec la confirmation de la commande et vos billets</p>
+
+        <a class="btn btn-primary" href="{{ path('home') }}">Retourner a l'accueil</a>
+        <a class="btn btn-primary" href="{{ path('booking') }}">Reserver pour une autre date</a>
+    </div>
+{% endblock %}
